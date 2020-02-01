@@ -13,7 +13,9 @@ matrix:
           - build-essential
           - python3-pip
           - liblo-dev 
-          - cython3        
+          - cython3
+      before_install:
+      - pip install --upgrade cython
 
     - os: osx
       language: generic
