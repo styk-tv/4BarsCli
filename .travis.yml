@@ -1,19 +1,20 @@
-language: python
+language: python3
 matrix:
   include:
     - os: linux
       python: 3.7
       before_install: 
       - sudo apt-get update
-      - sudo apt-get install build-essential python-pip liblo-dev cython -y
+      - sudo apt-get install build-essential python-pip3 liblo-dev cython -y
 
     - os: osx
       language: generic
       before_install:
-      - install_mac.sh
+      - "./install_mac.sh"
       
 script:
 - "./version.sh"
+
 deploy:
   provider: pypi
   user: __token__
