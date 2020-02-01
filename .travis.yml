@@ -2,7 +2,7 @@ dist: xenial
 language: python
 matrix:
   include:
-  - python: 3.7
+  - python: 3.7.4
     env: TOXENV=py37
 script:
 - "./version.sh"
