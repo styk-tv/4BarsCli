@@ -13,7 +13,7 @@ matrix:
           - build-essential
           - python3-pip
           - liblo-dev 
-          - cython          
+          - cython3        
 
     - os: osx
       language: generic
