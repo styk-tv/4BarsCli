@@ -1,4 +1,5 @@
-[![PyPI version](https://badge.fury.io/py/fourbars.svg)](https://badge.fury.io/py/fourbars)   ![(https://api.travis-ci.com/styk-tv/4bars.svg)](https://api.travis-ci.com/styk-tv/4bars.svg)
+[![PyPI version](https://badge.fury.io/py/fourbars.svg)](https://badge.fury.io/py/fourbars) [![TravisCI](https://api.travis-ci.com/styk-tv/4bars.svg)](https://travis-ci.com/styk-tv/4bars)
+
 
 # 4bars by Abletonists
 In Ableton Live, automatically record 4 bar sequences. Multi-scene record, then export all new recordings, name them, catalogue them.
