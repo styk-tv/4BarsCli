@@ -5,7 +5,7 @@ matrix:
       python: 3.7
       before_install: 
       - sudo apt-get update
-      - sudo apt-get install build-essential python-pip3 liblo-dev cython -y
+      - sudo apt-get install build-essential python3-pip liblo-dev cython -y
 
     - os: osx
       language: generic
