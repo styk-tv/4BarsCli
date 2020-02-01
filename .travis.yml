@@ -1,7 +1,5 @@
-language: python
-python:
-  - 3.7
-  
+language: python3
+
 git:
   depth: false
 
@@ -20,7 +18,11 @@ matrix:
       - pip install --upgrade cython
 
     - os: osx
+      osx_image: xcode11.3
+      language: shell  
       before_install:
+      - python3 --version
+      - pip3 install -U pip
       - "./install_mac.sh"
       
 script:
