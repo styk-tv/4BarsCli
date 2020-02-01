@@ -15,14 +15,6 @@ matrix:
           - liblo-dev 
           - cython          
 
-addons:
-  apt:
-    sources:
-      - ppa:chris-lea/redis-server
-    packages:
-    - redis-tools
-    - redis-server
-
     - os: osx
       language: generic
       before_install:
