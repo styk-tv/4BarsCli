@@ -1,11 +1,27 @@
 language: python3
+
+git:
+  depth: false
+
 matrix:
   include:
     - os: linux
-      python: 3.7
-      before_install: 
-      - sudo apt-get update
-      - sudo apt-get install build-essential python3-pip liblo-dev cython -y
+      dist: xenial
+      addons:
+        apt:
+          packages:
+          - build-essential
+          - python3-pip
+          - liblo-dev 
+          - cython          
+
+addons:
+  apt:
+    sources:
+      - ppa:chris-lea/redis-server
+    packages:
+    - redis-tools
+    - redis-server
 
     - os: osx
       language: generic
