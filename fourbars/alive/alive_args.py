@@ -20,7 +20,10 @@ class ALiveArgs(argparse.ArgumentParser):
             return
 
         self.add_argument('live', help='Subcommand to run')
-        args = self.parse_args(self.sub_args[1:2])
+        self.add_argument('-d', action="store")
+
+        args = self.parse_args(in_sub_args[1:])
+        #args = self.parse_args(self.sub_args[1:2])
 
         alive = ALive(args)
         # fix to use word import on arg but import is a reserved name

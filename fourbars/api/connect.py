@@ -16,6 +16,7 @@ class Connect(object):
         try:
             atoken, rtoken = self.settings.get_atoken_rtoken_seconds_to_expiry()
             if atoken > 60:
+                print("Token Valid: {0} seconds".format(atoken))
                 return True
         except:
             pass
@@ -36,9 +37,11 @@ class Connect(object):
                                      )
 
             self.settings.update_token(response.content)
+            print("Token Renewed")
             return True
 
-        except:
+        except requests.exceptions.RequestException as e:
+            print (e)
             return False
 
     def get_auth_header(self):
