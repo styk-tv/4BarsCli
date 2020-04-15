@@ -80,6 +80,11 @@ class ImportClip(object):
     def set_tempo(self, in_tempo):
         self.set.tempo = in_tempo
 
+    def create_and_set_clip(self, clip_index):
+        self.set.create_clip(0, clip_index, 16)
+        self.set.scan(scan_clip_names=True)
+        self.clip = self.set.tracks[0].clips[clip_index]
+        print()
 
 
 
@@ -91,13 +96,14 @@ class ImportClip(object):
         mid = Mid(self.sub_args)
         mid.load_midi_files()
 
-        self.track = self.set.tracks[0]
+        #self.track = self.set.tracks[0]
         for idx, trk in enumerate(mid.mitracks):
             clip_index = clip_pos_offset + idx
 
+            self.create_and_set_clip(clip_index)
             # track_index, clip_index, length
-            self.set.create_clip(0, clip_index, 16)
-            self.clip = self.track.clips[clip_index]
+            #self.set.create_clip(0, clip_index, 16)
+            #self.clip = self.track.clips[clip_index] #TODO: track clips is not refreshed and only holds first clip created (not 2+)
 
             ptrack = ParserTrack(trk, mid.ticks_per_beat)
 
@@ -114,7 +120,7 @@ class ImportClip(object):
 
 
         # verify
-        self.debug_clip_access()
+        #self.debug_clip_access()
 
 
 
