@@ -98,6 +98,8 @@ class ImportClip(object):
 
         #self.track = self.set.tracks[0]
         for idx, trk in enumerate(mid.mitracks):
+
+
             clip_index = clip_pos_offset + idx
 
             self.create_and_set_clip(clip_index)

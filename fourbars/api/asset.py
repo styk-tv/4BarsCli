@@ -20,7 +20,7 @@ class Asset(object):
             'Authorization': '{0}'.format(self.connect.get_auth_header()),
             'content-type': 'application/json'
         }
-        response = requests.post(self.connect.settings.api + 'asset/',
+        response = requests.post(self.connect.settings.api + 'mc/asset/',
                                  json=json.dumps(in_schema_asset.as_json()),
                                  headers=headers
                                  )
@@ -30,7 +30,7 @@ class Asset(object):
         pass
 
     def get_md5_quick(self, in_md5):
-        path = 'asset/md5/quick/{}'.format(in_md5)
+        path = 'mc/asset/md5/quick/{}'.format(in_md5)
         headers = {
             'Authorization': '{0}'.format(self.connect.get_auth_header()),
             'content-type': 'application/json'
