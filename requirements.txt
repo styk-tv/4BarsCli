@@ -2,6 +2,7 @@ Cython==0.29.13
 pyliblo >= 0.9.1
 termcolor==1.1.0
 -e git+https://github.com/styk-tv/python-randomnames.git@beaa1fad993bf03ac5bc6f3ace2eaed119585f80#egg=randomnames
+-e git+https://github.com/ideoforms/pylive.git@master#egg=pylive
 yamlordereddictloader==0.4.0
 prettytable==0.7.2
 mido==1.2.9
@@ -10,3 +11,4 @@ ffmpeg-python==0.2.0
 requests==2.22.0
 rfc3339==6.2
 iso8601==0.1.12
+prompt_toolkit==3.0.5

@@ -46,12 +46,17 @@ import os
 import yaml
 import yamlordereddictloader
 from fourbars.alive.locations import Locations
-from fourbars.mid.mid import Mid
+from fourbars.mid.mc_midi import *
+from fourbars.alive.mc_clip_list import McClipList
 from fourbars.alive.parser_track import ParserTrack
+
 
 class Struct:
     def __init__(self, **entries):
         self.__dict__.update(entries)
+
+
+
 
 
 class ImportClip(object):
@@ -86,28 +91,44 @@ class ImportClip(object):
         self.clip = self.set.tracks[0].clips[clip_index]
         print()
 
-
+    def add_clip_from_mcclip(self, in_clip_index, in_mc_clip):
+        self.create_and_set_clip(in_clip_index)
+        self.set.set_clip_name(0, in_clip_index, in_mc_clip.name)
+        for note in in_mc_clip.clip_notes:
+            self.clip.add_note(note.note, note.position, note.duration, note.velocity)
 
     def add_tracks_as_clips(self):
 
 
         clip_pos_offset = 9
 
-        mid = Mid(self.sub_args)
-        mid.load_midi_files()
+        mc_clip_list = McClipList(self.sub_args)
+        print()
+
+
 
         #self.track = self.set.tracks[0]
-        for idx, trk in enumerate(mid.mitracks):
-
+        for idx, mc_clip in enumerate(mc_clip_list):
 
             clip_index = clip_pos_offset + idx
+            self.add_clip_from_mcclip(clip_index, mc_clip)
 
-            self.create_and_set_clip(clip_index)
+            # self.create_and_set_clip(clip_index)
+            #
+            #
+            #
+            # self.clip.add_note(60, 0, 0.25, 60)
+            # self.clip.add_note(60, 1, 0.25, 10)
+            # self.clip.add_note(60, 2, 0.25, 120)
+            # self.clip.add_note(61, 3, 1, 120)
+
+
+
             # track_index, clip_index, length
             #self.set.create_clip(0, clip_index, 16)
             #self.clip = self.track.clips[clip_index] #TODO: track clips is not refreshed and only holds first clip created (not 2+)
 
-            ptrack = ParserTrack(trk, mid.ticks_per_beat)
+            #ptrack = ParserTrack(trk, mid.ticks_per_beat)
 
             # note position duration velocity
             """
@@ -116,8 +137,8 @@ class ImportClip(object):
             :param duration:  (float)  Duration, in beats
             :param velocity:  (int)    MIDI note velocity
             """
-            for i, note in enumerate(ptrack.clip_notes):
-                self.clip.add_note(note.note, note.position, note.duration, note.velocity)
+            # for i, note in enumerate(ptrack.clip_notes):
+            #     self.clip.add_note(note.note, note.position, note.duration, note.velocity)
 
 
 
@@ -154,7 +175,7 @@ class ImportClip(object):
 
         # since references by value not ref, we need to reload
         #self.debug_set_access()
-        self.debug_track_access_assume_first_is_midi()
+        self.add_note()
 
         # verify
         self.debug_clip_access()
@@ -164,8 +185,8 @@ class ImportClip(object):
         # if self.sub_args.d:
         #     self.locations.pwd = self.sub_args.d
 
-        mid = Mid(self.sub_args)
-        mid.load_midi_files()
+        #mid = Mid(self.sub_args)
+        #mid.load_midi_files()
 
         # example_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), "ex001.4bars.yaml")
         # data = None
