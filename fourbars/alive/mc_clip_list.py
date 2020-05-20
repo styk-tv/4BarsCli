@@ -9,13 +9,12 @@ class McClipList(list):
     def __init__(self, in_sub_args):
         super().__init__()
         #self.extend(McMidiList(directory=in_sub_args.d))
-        self.validate(McMidiList(directory=in_sub_args.d))
+        self.get_clips(McMidiList(directory=in_sub_args.d))
         pass
 
-    def validate(self, in_midi_list):
+    def get_clips(self, in_midi_list):
         for midi_file in in_midi_list:
             for clip in midi_file.clips:
-                if clip.playable:
-                    self.append(clip)
+                self.append(clip)
 
 # methods for serving different variations

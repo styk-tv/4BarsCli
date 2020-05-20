@@ -49,7 +49,8 @@ from fourbars.alive.locations import Locations
 from fourbars.mid.mc_midi import *
 from fourbars.alive.mc_clip_list import McClipList
 from fourbars.alive.parser_track import ParserTrack
-
+from prompt_toolkit import prompt
+#import readchar
 
 class Struct:
     def __init__(self, **entries):
@@ -85,22 +86,35 @@ class ImportClip(object):
     def set_tempo(self, in_tempo):
         self.set.tempo = in_tempo
 
+    def create_empty_scene(self, index):
+        """ Creates a new scene by an index. if -1 the scene is created at the end.
+         Idea here is always to have same number available so at end is fine."""
+        self.set.create_scene(index)
+
     def create_and_set_clip(self, clip_index):
+        self.create_empty_scene_at_end()
         self.set.create_clip(0, clip_index, 16)
         self.set.scan(scan_clip_names=True)
         self.clip = self.set.tracks[0].clips[clip_index]
         print()
 
     def add_clip_from_mcclip(self, in_clip_index, in_mc_clip):
-        self.create_and_set_clip(in_clip_index)
+
+        self.set.create_clip(0, in_clip_index, in_mc_clip.duration_bars_in_beats)
+        self.set.scan(scan_clip_names=True)
+        self.clip = self.set.tracks[0].clips[in_clip_index]
+
         self.set.set_clip_name(0, in_clip_index, in_mc_clip.name)
-        for note in in_mc_clip.clip_notes:
-            self.clip.add_note(note.note, note.position, note.duration, note.velocity)
+        try:
+            for note in in_mc_clip.clip_notes:
+                self.clip.add_note(note.note, note.position, note.duration, note.velocity)
+        except:
+            pass
 
     def add_tracks_as_clips(self):
 
 
-        clip_pos_offset = 9
+        clip_pos_offset = 7
 
         mc_clip_list = McClipList(self.sub_args)
         print()
@@ -111,7 +125,21 @@ class ImportClip(object):
         for idx, mc_clip in enumerate(mc_clip_list):
 
             clip_index = clip_pos_offset + idx
+            self.create_empty_scene(clip_index)
             self.add_clip_from_mcclip(clip_index, mc_clip)
+
+            # clip_explored = False  # to initialize for scope
+            # while not clip_explored:
+            #     clip_explored = False  # to initialize for loop
+            #     # print('CONFIRM ACTION: Skip [SPACE], Save [S], Semi [ArUp/ArDown], Shift Sel [ArLeft/ArRight], Tempo [LBrDivide/RBrMultiply] : ')
+            #     # print(repr(readchar.readchar()))
+            #     answer = prompt('CONFIRM ACTION: Skip [SPACE], Save [S], Semi [ArUp/ArDown], Shift Sel [ArLeft/ArRight], Tempo [LBrDivide/RBrMultiply] : ')
+            #     print('You said: %s' % answer)
+            #     if answer.upper() == 'S':
+            #         clip_explored = True
+            #     pass
+
+
 
             # self.create_and_set_clip(clip_index)
             #

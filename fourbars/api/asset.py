@@ -30,7 +30,7 @@ class Asset(object):
         pass
 
     def get_md5_quick(self, in_md5):
-        path = 'mc/asset/md5/quick/{}'.format(in_md5)
+        path = 'mc/asset/md5/quick/{0}'.format(in_md5)
         headers = {
             'Authorization': '{0}'.format(self.connect.get_auth_header()),
             'content-type': 'application/json'
@@ -42,4 +42,5 @@ class Asset(object):
         if response.status_code == 200:
             return response.text.replace('\n','').replace('"', '')
         else:
+            # does not exist, brand new file
             return None

@@ -6,6 +6,7 @@ from fourbars.alive.locations import Locations
 from fourbars.alive.parser_track import ParserTrack
 #from fourbars.mid.mc_midi_list import McMidi
 import string
+import math
 
 
 class McTrack(object):
@@ -14,6 +15,7 @@ class McTrack(object):
     time_signature = None
     clip_notes = []
     playable = False
+    duration_bars_in_beats = 0
 
     def __init__(self, in_track, in_ticks_per_beat):
         self.clip_notes = []
@@ -37,6 +39,7 @@ class McTrack(object):
     def abletonize(self):
         pos_midi = 0
         pos_clip = 0
+        base = 4  # TODO: static, temporary
         for i, message in enumerate(self.track):
             pos_midi += message.time
             pos_clip += message.time / self.ticks_per_beat
@@ -52,6 +55,7 @@ class McTrack(object):
                 for note in self.clip_notes:
                     if not note.duration:
                         note.duration = pos_clip - note.position
+                        self.duration_bars_in_beats = base * math.ceil(pos_clip/base)
                         pass
 
 
@@ -77,7 +81,8 @@ class McMidi(mido.MidiFile):
 
         for i, track in enumerate(self.tracks):
             t = McTrack(track, self.ticks_per_beat)
-            self.clips.append(t)
+            if t.playable:
+                self.clips.append(t)
 
         pass
 
