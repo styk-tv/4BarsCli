@@ -1,6 +1,7 @@
-[![PyPI version](https://badge.fury.io/py/fourbars.svg)](https://badge.fury.io/py/fourbars)   ![(https://api.travis-ci.com/styk-tv/4bars.svg)](https://api.travis-ci.com/styk-tv/4bars.svg)
+[![PyPI version](https://badge.fury.io/py/fourbars.svg)](https://badge.fury.io/py/fourbars) [![TravisCI](https://api.travis-ci.com/styk-tv/4bars.svg)](https://travis-ci.com/styk-tv/4bars)
 
-# 4bars by Abletonists
+
+# 4bars by MusicAsCode
 In Ableton Live, automatically record 4 bar sequences. Multi-scene record, then export all new recordings, name them, catalogue them.
 
 ## Ableton Workflow as Code
@@ -89,4 +90,5 @@ Default ffmpeg LAME encoder for MP3 adds a 25ms silence on both pre-loop and pos
 Local files, can then be mass tagged and uploaded to `4bars.media` online space for social sequencing purposes and further distribution as required.
 
 ## Help
-Join "Abletonists" Slack channel. Immediate invitation at: https://abletonists.4bars.media
+* Join "MusicAsCode" @ [Slack Invite](https://join.slack.com/t/musicascode/shared_invite/zt-dchgrsqu-DpZZ4ccIY68qMCONXOzH7g)
+* Join "MusicAsCode" @ [Discord Invite](https://discord.gg/3ve6Ue6)
