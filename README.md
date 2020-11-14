@@ -17,7 +17,7 @@ In Ableton Live, automatically record 4 bar sequences. Multi-scene record, then 
 - Ableton Live v10.1+
 - python 3.7.2 +
 - brew install ffmpeg
-- pyenv vritualenv 4bars (you will need pyenv virtualenv with 3.7.2 named 4bars)
+- pyenv virtualenv 4bars (you will need pyenv virtualenv with 3.7.2 named 4bars)
 - brew install liblo 
 - [pylive](https://github.com/ideoforms/pylive) (freedom to work with Live outside of Live python)
 - liveosc (forked for AL10+, comes with pylive)
