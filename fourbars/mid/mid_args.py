@@ -1,6 +1,6 @@
 import argparse
 from fourbars.core.spawn import Spawn
-from fourbars.mid.mid import Mid
+from fourbars.mid.mc_midi_list import McMidiList
 
 
 class MidArgs(argparse.ArgumentParser):
@@ -33,12 +33,12 @@ class MidArgs(argparse.ArgumentParser):
 
         args = self.parse_args(in_sub_args[1:])
 
-        mid = Mid(args)
-        if not hasattr(mid, args.mid):
+        mc_midi_list = McMidiList().load_midi_files(args)
+        if not hasattr(mc_midi_list, args.mid):
             self.help()
             exit(1)
 
-        getattr(mid, args.mid)()
+        getattr(mc_midi_list, args.mid)()
 
     def help(self):
         Spawn.help_desc()

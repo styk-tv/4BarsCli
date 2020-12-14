@@ -29,8 +29,9 @@ class Asset(object):
 
     guid = None
     name = None
-    tempo = None
-    typ = None
+    key = None
+    bpm = None
+    category = None
     bars = None
     length = None
     f_owner = None
@@ -60,6 +61,9 @@ class Asset(object):
 
         return {
             'name': self.name,
+            'key': self.key,
+            'bpm': self.bpm,
+            'category': self.category,
             'items': items,
             'created': self.created
         }
@@ -127,6 +131,20 @@ class Asset(object):
         #ai.created = self.created
 
         self.name = ai.org_name
+
+        self.bpm = ai.bpm
+
+        # parse category from filename
+        try:
+            self.category = self.name.split(' ')[0].split('_')[1].upper()
+        except:
+            pass
+
+        try:
+            self.key = self.name.split(' ')[0].split('_')[2].upper()
+        except:
+            pass
+
         self.items.add(AssetType.AIF_ORG, ai)
 
     def process_web(self, in_asset_type):
@@ -278,6 +296,7 @@ class AssetItem(object):
         self.bpm = "{0:.2f}".format(round(bpm_f, 2))
 
         # TODO: scale and key not implemented
+        # as of 2020.05.20 implemented at Asset level. to be removed.
         self.m_scale = ""
         self.m_key = ""
         print (self.org_abs_path, self.duration, self.format_name, self.bit_rate, self.sample_rate, self. channels)
